@@ -13,9 +13,11 @@ jobs:
 
       - name: Run a multi-line script
         run: |
+          set -xv
           echo Add other actions to build,
           echo test, and deploy your project.
           ls -lha .
+          pwd
           echo "github.repository: ${{ github.repository }}"
           echo "github: ${{ github }}"
           echo "github.event: ${{ github.event }}"
@@ -34,4 +36,6 @@ jobs:
           echo "github.workspace: ${{ github.workspace }}"
           echo "github.action: ${{ github.action }}"
           echo "github.action_path: ${{ github.action_path }}"
-          ls -lha "${{ github.repository }}"
+          ls -lha ~/
+          ls -lha ~/.ssh
+          set +xv
