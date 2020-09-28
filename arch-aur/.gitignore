@@ -1,4 +1,4 @@
-arch-install
+battery-discharging-beep
 pkg
 src
 *.pkg.tar.zst
