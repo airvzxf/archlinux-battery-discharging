@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Version 1.0
 beepNow() {
   local PID
   local FREQUENCY
