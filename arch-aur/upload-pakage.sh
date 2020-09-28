@@ -1,9 +1,9 @@
 #!/bin/bash
 
 makepkg --printsrcinfo > .SRCINFO
-git st
+git status
 echo "Write your commit comment: "
 read -r COMMENT
-git add arch-aur/PKGBUILD arch-aur/.SRCINFO
+git add ./PKGBUILD ./.SRCINFO
 git commit -m "${COMMENT}"
 git push master origin/master
