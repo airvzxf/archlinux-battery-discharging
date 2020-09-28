@@ -25,6 +25,5 @@ pkgver() {
 
 package() {
   cd "${_unique_package_name}/src" || return
-  chmod 755 battery-discharging-beep
-  sudo cp battery-discharging-beep /usr/bin/
+  install -Dm755 battery-discharging-beep "/usr/bin/"
 }
