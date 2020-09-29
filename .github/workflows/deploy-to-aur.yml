@@ -15,14 +15,14 @@ jobs:
         id: hello
         uses: ./.github/actions/action.yml
         with:
-          who-to-greet: 'Mona the Octocat'
+          who-to-greet: 'Mona the Octant'
         env:
           SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
           echo "Not needs to run this."
-      #          ${{ github.workspace }}/.github/workflows/deployment.sh
+          # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
