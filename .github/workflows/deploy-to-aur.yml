@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./archlinux.yml
+      - uses: ./.github/workflows/archlinux.yml
 
       - name: Update the AUR package and Commit the changes via Git
         env:
