@@ -1,4 +1,18 @@
 - uses: actions/checkout@v2
+- name: Checks
+  runs: |
+    cd /home/runner/work/
+    ls -lha .
+
+    cd linux-battery-discharging-beep
+    ls -lha .
+
+    cd linux-battery-discharging-beep
+    ls -lha .
+
+    cd .github
+    ls -lha .
+
 - name: 'Hello World'
   description: 'Greet someone and record the time'
   inputs:
