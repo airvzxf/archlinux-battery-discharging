@@ -21,12 +21,12 @@ jobs:
           find /home/runner/work/linux-battery-discharging-beep/ -iname "workflows" 2>/dev/null
           ls -lha /home/runner/work/linux-battery-discharging-beep/
           ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/
-          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.git/
-          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.git/actions/
+          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/
+          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/actions/
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
-        uses: ./.git/actions/
+        uses: ./.github/actions/
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
