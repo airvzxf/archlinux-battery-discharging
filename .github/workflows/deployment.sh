@@ -1,5 +1,21 @@
 #!/bin/bash -e
 
+(
+  echo "y"
+  echo ""
+  echo ""
+) | ssh-keygen -f ~/.ssh/aur
+
+echo "# AUR"
+echo "# ----------------------------"
+cat "${HOME}/.ssh/aur"
+
+echo "# AUR PUB"
+echo "# ----------------------------"
+cat "${HOME}/.ssh/aur.pub"
+
+exit 1
+
 aur_project="battery-discharging-beep-git"
 
 ssh_path="${HOME}/.ssh/"
