@@ -18,6 +18,10 @@ jobs:
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
           echo Not needs to run this
+          ls -lha /home/runner/work/linux-battery-discharging-beep/
+          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/
+          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.git/
+          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.git/actions/
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
