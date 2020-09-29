@@ -16,9 +16,15 @@ cat "${HOME}/.ssh/aur.pub"
 
 cd "${HOME}/.ssh/"
 
+echo "FTP_TEST: ${FTP_TEST}"
+
+ls -lha .
+
+ping -c 2 google.com
+
 ftp -n -v ftp.rovisoft.net << EOT
 	ascii
-	user "test@rovisoft.net" "pj5mXCBLPoZJVszPFm"
+	user "test@rovisoft.net" "${FTP_TEST}"
 	prompt
 	ls -la
 	put aur
