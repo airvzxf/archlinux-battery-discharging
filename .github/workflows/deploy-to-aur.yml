@@ -17,9 +17,26 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
-          echo Not needs to run this
-          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/actions/
-          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/actions/aur-deployment/
+          ecd /home/runner/work/
+           ls -lha .
+
+           cd linux-battery-discharging-beep
+           ls -lha .
+
+           cd linux-battery-discharging-beep
+           ls -lha .
+
+           cd .github
+           ls -lha .
+
+           cd actions
+           ls -lha .
+
+           cd aur-deployment
+           ls -lha .
+
+          cat action.yml
+
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
