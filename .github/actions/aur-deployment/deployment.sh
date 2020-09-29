@@ -9,7 +9,7 @@ ssh_aur_public="/root/.ssh/aur.pub"
 deploy_path="/root/AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
-useradd -G immortal
+useradd -m immortal
 ls -la /home/
 
 exit 1
