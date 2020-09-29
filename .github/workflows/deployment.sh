@@ -57,17 +57,13 @@ cat "${ssh_config}"
 
 ls -lha "${HOME}/.ssh/"
 
-#ssh-add -L
-#ssh-add "${ssh_aur_private}"
-ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
-
-exit 2
+#ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 echo "ssh://aur@aur.archlinux.org/${aur_project}.git"
-git clone -vvvv --ipv4 "ssh://aur@aur.archlinux.org/${aur_project}.git"
+git clone -vvvv --ipv4 -o StrictHostKeyChecking=no "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 pwd
 cp -f "${aur_package}"* .
