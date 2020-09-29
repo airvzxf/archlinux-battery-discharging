@@ -65,7 +65,14 @@ cd "${deploy_path}" || exit
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
-./upload-package-automatic.sh
+makepkg -f
+rm -fR battery-discharging-beep* pkg src .SRCINFO
+makepkg --printsrcinfo > .SRCINFO
+git diff --exit-code
+git add .
+git status
+#git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
+#git push
 
 cd "${HOME}" || exit
 rm -f "${ssh_config}"
