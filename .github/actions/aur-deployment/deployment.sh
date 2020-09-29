@@ -37,10 +37,8 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-ls -lha "${ssh_path}"
 # Test the connection to the AUR server.
-ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
-exit 1
+#ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
