@@ -16,7 +16,13 @@
 #curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
 #  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
 
-#exit 1
+#exit 2
+
+echo "Hello ${1}"
+time=$(date)
+echo "::set-output name=time::${time}"
+
+exit 2
 
 aur_project="battery-discharging-beep-git"
 

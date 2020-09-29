@@ -16,5 +16,18 @@ jobs:
           SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
-        run: |
-          ${{ github.workspace }}/.github/workflows/deployment.sh
+        # run: |
+        #   ${{ github.workspace }}/.github/workflows/deployment.sh
+        inputs:
+          who-to-greet:
+            description: 'Who to greet'
+            required: true
+            default: 'World'
+        outputs:
+          time:
+            description: 'The time we greeted you'
+        runs:
+          using: 'docker'
+          image: 'Dockerfile'
+          args:
+            - ${{ inputs.who-to-greet }}
