@@ -10,7 +10,13 @@ deploy_path="/root/AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
 useradd -m immortal
+echo "HOME: ${HOME}"
 ls -la /home/
+
+su immortal -
+echo "HOME: ${HOME}"
+ls -lha .
+exit
 
 exit 1
 
