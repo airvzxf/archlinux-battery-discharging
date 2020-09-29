@@ -11,33 +11,33 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Update the AUR package and Commit the changes via Git
-        env:
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          WORKSPACE_PATH: ${{ github.workspace }}
-        run: |
-          cd /home/runner/work/
-          ls -lha .
-
-          cd linux-battery-discharging-beep
-          ls -lha .
-
-          cd linux-battery-discharging-beep
-          ls -lha .
-
-          cd .github
-          ls -lha .
-
-          cd actions
-          ls -lha .
-
-          cd aur-deployment
-          ls -lha .
-
-          cat action.yml
-
-          # ${{ github.workspace }}/.github/workflows/deployment.sh
+      #      - name: Update the AUR package and Commit the changes via Git
+      #        env:
+      #          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+      #          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #          WORKSPACE_PATH: ${{ github.workspace }}
+      #        run: |
+      #          cd /home/runner/work/
+      #          ls -lha .
+      #
+      #          cd linux-battery-discharging-beep
+      #          ls -lha .
+      #
+      #          cd linux-battery-discharging-beep
+      #          ls -lha .
+      #
+      #          cd .github
+      #          ls -lha .
+      #
+      #          cd actions
+      #          ls -lha .
+      #
+      #          cd aur-deployment
+      #          ls -lha .
+      #
+      #          cat action.yml
+      #
+      #          # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
         uses: ./.github/actions/aur-deployment/action.yml
