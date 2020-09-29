@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash -exv
 
 echo "Hello!"
 #echo "Hello ${1}"

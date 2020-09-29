@@ -8,6 +8,5 @@ RUN ["/bin/chmod", "+x", "/app/init.sh"]
 
 RUN ["/bin/ls", "-lha", "/"]
 RUN ["/bin/ls", "-lha", "/app/"]
-RUN ["/bin/ls", "-lha", "/github/workspace/"]
 
-#ENTRYPOINT ["/app/init.sh"]
+ENTRYPOINT ["/app/init.sh"]
