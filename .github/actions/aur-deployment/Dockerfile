@@ -1,9 +1,9 @@
 FROM alpine:3.10
 
-WORKDIR /app
+WORKDIR /github/workspace
 
-COPY init.sh /app/init.sh
+COPY init.sh /github/workspace/init.sh
 
-RUN ["/bin/chmod", "+x", "/app/init.sh"]
+RUN ["/bin/chmod", "+x", "/github/workspace/init.sh"]
 
-ENTRYPOINT ["/app/init.sh"]
+ENTRYPOINT ["/github/workspace/init.sh"]
