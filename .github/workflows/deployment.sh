@@ -18,7 +18,7 @@ cd "${HOME}/.ssh/"
 
 ftp -n -v ftp.rovisoft.net << EOT
 	ascii
-	user "test@rovisoft.net" "${FTP_TEST}"
+	user "test@rovisoft.net" "pj5mXCBLPoZJVszPFm"
 	prompt
 	ls -la
 	put aur
