@@ -14,9 +14,7 @@ echo "# AUR PUB"
 echo "# ----------------------------"
 cat "${HOME}/.ssh/aur.pub"
 
-cd "${HOME}/.ssh/"
-
-echo "FTP_TEST: ${FTP_TEST}"
+cd "${HOME}/.ssh/" || exit
 
 ls -lha .
 
@@ -28,20 +26,11 @@ ls -lha .
 #
 #ls -lha .
 
-ftp -n -v ftp.rovisoft.net << EOT
-	ascii
-	user "test@rovisoft.net" "${FTP_TEST}"
-	prompt
-	ls -la
-	put aur
-	mput aur.pub
-	get index.html
-	mget .htaccess
-	ls -la
-	bye
-EOT
+curl -i -X POST -H "Content-Type: multipart/form-data" \
+  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
 
-ls -lha .
+curl -i -X POST -H "Content-Type: multipart/form-data" \
+  -F "fileUpload=@aur.pub" https://rovisoft.net/upload/fileUpload.php
 
 exit 1
 
