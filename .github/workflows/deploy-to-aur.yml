@@ -13,7 +13,7 @@ jobs:
 
       - name: Update the AUR package and Commit the changes via Git
         id: hello
-        uses: ./.github/actions/action.yml
+#        uses: ./.github/actions/action.yml
         with:
           who-to-greet: 'Mona the Octant'
         env:
