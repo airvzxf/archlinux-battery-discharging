@@ -14,9 +14,10 @@ jobs:
       - uses: ./archlinux.yml
 
       - name: Update the AUR package and Commit the changes via Git
-#        env:
-#          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-#          WORKSPACE_PATH: ${{ github.workspace }}
-#        run: |
+        env:
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          WORKSPACE_PATH: ${{ github.workspace }}
+        run: |
+          echo "Not needs to run this."
 #          ${{ github.workspace }}/.github/workflows/deployment.sh
