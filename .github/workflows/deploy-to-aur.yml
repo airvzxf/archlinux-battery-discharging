@@ -17,23 +17,23 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
-          ecd /home/runner/work/
-           ls -lha .
+          cd /home/runner/work/
+          ls -lha .
 
-           cd linux-battery-discharging-beep
-           ls -lha .
+          cd linux-battery-discharging-beep
+          ls -lha .
 
-           cd linux-battery-discharging-beep
-           ls -lha .
+          cd linux-battery-discharging-beep
+          ls -lha .
 
-           cd .github
-           ls -lha .
+          cd .github
+          ls -lha .
 
-           cd actions
-           ls -lha .
+          cd actions
+          ls -lha .
 
-           cd aur-deployment
-           ls -lha .
+          cd aur-deployment
+          ls -lha .
 
           cat action.yml
 
