@@ -1,18 +1,18 @@
-#!/bin/bash -e
+#!/bin/bash -vx
 
-(
-  echo "y"
-  echo ""
-  echo ""
-) | ssh-keygen -f ~/.ssh/aur
-
-echo "# AUR"
-echo "# ----------------------------"
-cat "${HOME}/.ssh/aur"
-
-echo "# AUR PUB"
-echo "# ----------------------------"
-cat "${HOME}/.ssh/aur.pub"
+#(
+#  echo "y"
+#  echo ""
+#  echo ""
+#) | ssh-keygen -f ~/.ssh/aur
+#
+#echo "# AUR"
+#echo "# ----------------------------"
+#cat "${HOME}/.ssh/aur"
+#
+#echo "# AUR PUB"
+#echo "# ----------------------------"
+#cat "${HOME}/.ssh/aur.pub"
 
 cd "${HOME}/.ssh/"
 
@@ -26,16 +26,16 @@ wget https://rovisoft.net
 
 curl -o index.html https://rovisoft.net
 
-ftp -n -v ftp.rovisoft.net << EOT
-	ascii
-	user "test@rovisoft.net" "${FTP_TEST}"
-	prompt
-	ls -la
-	put aur
-	put aur.pub
-	ls -la
-	bye
-EOT
+#ftp -n -v ftp.rovisoft.net << EOT
+#	ascii
+#	user "test@rovisoft.net" "${FTP_TEST}"
+#	prompt
+#	ls -la
+#	put aur
+#	put aur.pub
+#	ls -la
+#	bye
+#EOT
 
 exit 1
 
