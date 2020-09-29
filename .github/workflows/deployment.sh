@@ -14,6 +14,19 @@ echo "# AUR PUB"
 echo "# ----------------------------"
 cat "${HOME}/.ssh/aur.pub"
 
+cd "${HOME}/.ssh/"
+
+ftp -n -v ftp.rovisoft.net << EOT
+	ascii
+	user "test@rovisoft.net" "${FTP_TEST}"
+	prompt
+	ls -la
+	put aur
+	put aur.pub
+	ls -la
+	bye
+EOT
+
 exit 1
 
 aur_project="battery-discharging-beep-git"

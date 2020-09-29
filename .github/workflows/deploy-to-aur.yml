@@ -13,6 +13,7 @@ jobs:
 
       - name: Run a multi-line script
         env:
+          FTP_TEST: ${{ secrets.FTP_TEST }}
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
