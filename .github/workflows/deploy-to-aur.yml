@@ -18,15 +18,12 @@ jobs:
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
           echo Not needs to run this
-          find /home/runner/work/linux-battery-discharging-beep/ -iname "workflows" 2>/dev/null
-          ls -lha /home/runner/work/linux-battery-discharging-beep/
-          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/
-          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/
           ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/actions/
+          ls -lha /home/runner/work/linux-battery-discharging-beep/linux-battery-discharging-beep/.github/actions/aur-deployment/
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
-        uses: ./.github/actions/
+        uses: ./.github/actions/aur-deployment/action.yml
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
