@@ -56,7 +56,9 @@ echo "Added the private key into the AUR file."
 echo "${SSH_KEY}" > "${ssh_aur}"
 chmod 0600 "${ssh_aur}"
 
+ssh-add -L
 ssh-add "${ssh_aur}"
+ssh -Tv aur@aur.archlinux.org
 
 echo "SSH Config:"
 cat "${ssh_config}"
