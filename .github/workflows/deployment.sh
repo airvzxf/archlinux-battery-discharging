@@ -59,7 +59,7 @@ ls -lha "${HOME}/.ssh/"
 
 ssh-add -L
 ssh-add "${ssh_aur_private}"
-ssh -Tv -i --ipv4 "${ssh_aur_private}" aur@aur.archlinux.org
+ssh -Tv --ipv4 -i "${ssh_aur_private}" aur@aur.archlinux.org
 
 exit 2
 
