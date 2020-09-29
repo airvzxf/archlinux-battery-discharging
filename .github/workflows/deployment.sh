@@ -59,7 +59,7 @@ ls -lha "${HOME}/.ssh/"
 
 ssh-add -L
 ssh-add "${ssh_aur_private}"
-ssh -Tv -i "${ssh_aur_private}" aur@aur.archlinux.org
+ssh -Tv -i --ipv4 "${ssh_aur_private}" aur@aur.archlinux.org
 
 exit 2
 
@@ -67,7 +67,7 @@ cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 echo "ssh://aur@aur.archlinux.org/${aur_project}.git"
-git clone -v --ipv6 "ssh://aur@aur.archlinux.org/${aur_project}.git"
+git clone -vvvv --ipv6 "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 pwd
 cp -f "${aur_package}"* .
