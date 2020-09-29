@@ -18,7 +18,7 @@ rm -fR battery-discharging-beep* pkg src .SRCINFO
 makepkg --printsrcinfo > .SRCINFO
 echo ""
 
-git diff --exit-code && echo ""
+git diff --exit-code
 git add .
 git status
 
