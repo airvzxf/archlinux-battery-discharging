@@ -11,24 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: ./archlinux.yml
+
       - name: Update the AUR package and Commit the changes via Git
-        env:
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          WORKSPACE_PATH: ${{ github.workspace }}
-        # run: |
-        #   ${{ github.workspace }}/.github/workflows/deployment.sh
-        inputs:
-          who-to-greet:
-            description: 'Who to greet'
-            required: true
-            default: 'World'
-        outputs:
-          time:
-            description: 'The time we greeted you'
-        runs:
-          using: 'docker'
-          image: 'Dockerfile'
-          args:
-            - ${{ inputs.who-to-greet }}
-        run: echo "Hi!"
+#        env:
+#          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+#          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#          WORKSPACE_PATH: ${{ github.workspace }}
+#        run: |
+#          ${{ github.workspace }}/.github/workflows/deployment.sh
