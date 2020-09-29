@@ -15,4 +15,4 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
-        run: ./deployment.sh
+        run: ${{ github.workspace }}/.github/workflows/deployment.sh
