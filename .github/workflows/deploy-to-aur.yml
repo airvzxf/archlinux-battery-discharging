@@ -17,33 +17,9 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
-          cd /home/runner/work/
-          ls -lha .
-
-          cd linux-battery-discharging-beep
-          ls -lha .
-
-          cd linux-battery-discharging-beep
-          ls -lha .
-
-          cd .github
-          ls -lha .
-
-          cd actions
-          ls -lha .
-
-          cd aur-deployment
-          ls -lha .
-
-          cat action.yml
-
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
         uses: ./.github/actions/aur-deployment/
-        id: hello
         with:
           who-to-greet: 'Mona the Octant'
-
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
