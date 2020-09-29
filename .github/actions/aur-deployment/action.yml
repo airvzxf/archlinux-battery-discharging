@@ -1,36 +1,15 @@
-- uses: actions/checkout@v2
-- name: Checks
-  runs: |
-    cd /home/runner/work/
-    ls -lha .
-
-    cd linux-battery-discharging-beep
-    ls -lha .
-
-    cd linux-battery-discharging-beep
-    ls -lha .
-
-    cd .github
-    ls -lha .
-
-    cd actions
-    ls -lha .
-
-    cd aur-deployment
-    ls -lha .
-
-- name: 'Hello World'
-  description: 'Greet someone and record the time'
-  inputs:
-    who-to-greet:
-      description: 'Who to greet'
-      required: true
-      default: 'World'
-  outputs:
-    time:
-      description: 'The time we greeted you'
-  runs:
-    using: 'docker'
-    image: 'Dockerfile'
-    args:
-      - ${{ inputs.who-to-greet }}
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+outputs:
+  time:
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.who-to-greet }}
