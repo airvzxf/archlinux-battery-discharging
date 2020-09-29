@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 aur_project="battery-discharging-beep-git"
 
@@ -7,7 +7,7 @@ ssh_config="${HOME}/.ssh/config"
 ssh_aur_private="${HOME}/.ssh/aur"
 ssh_aur_public="${HOME}/.ssh/aur.pub"
 deploy_path="${HOME}/AUR/"
-aur_package="${WORKSPACE_PATH}/arch-aur/"
+aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"

@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM archlinux:latest
 
 WORKDIR /app
 
