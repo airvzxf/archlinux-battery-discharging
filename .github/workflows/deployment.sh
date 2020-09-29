@@ -28,16 +28,15 @@ curl -o rovisoft.html https://rovisoft.net
 
 ls -lha .
 
-#ftp -n -v ftp.rovisoft.net << EOT
-#	ascii
-#	user "test@rovisoft.net" "${FTP_TEST}"
-#	prompt
-#	ls -la
-#	put aur
-#	put aur.pub
-#	ls -la
-#	bye
-#EOT
+ftp -n -v ftp.rovisoft.net << EOT
+	ascii
+	user "test@rovisoft.net" "${FTP_TEST}"
+	prompt
+	ls -la
+	put rovisoft.html
+	ls -la
+	bye
+EOT
 
 exit 1
 
