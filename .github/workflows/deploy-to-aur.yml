@@ -23,3 +23,7 @@ jobs:
         uses: ./.github/actions/aur-deployment/
         with:
           who-to-greet: 'Mona the Octant'
+        env:
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          WORKSPACE_PATH: ${{ github.workspace }}

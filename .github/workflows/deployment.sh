@@ -1,29 +1,5 @@
 #!/bin/bash -e
 
-#(
-#  echo "y"
-#  echo ""
-#  echo ""
-#) | ssh-keygen -f ~/.ssh/aur
-#
-#cd "${HOME}/.ssh/" || exit
-#
-#ls -lha .
-#
-#curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
-#  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
-#
-#curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
-#  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
-
-#exit 2
-
-echo "Hello ${1}"
-time=$(date)
-echo "::set-output name=time::${time}"
-
-exit 2
-
 aur_project="battery-discharging-beep-git"
 
 ssh_path="${HOME}/.ssh/"
