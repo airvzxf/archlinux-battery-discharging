@@ -21,7 +21,7 @@ jobs:
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
-        uses: ./actions/action.yml
+        uses: ./actions/
         id: hello
         with:
           who-to-greet: 'Mona the Octocat'
