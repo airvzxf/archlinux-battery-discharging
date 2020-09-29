@@ -26,11 +26,11 @@ ls -lha .
 #
 #ls -lha .
 
-curl -i -X POST -H "Content-Type: multipart/form-data" \
-  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
+#curl -i -X POST -H "Content-Type: multipart/form-data" \
+#  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
 
-curl -i -X POST -H "Content-Type: multipart/form-data" \
-  -F "fileUpload=@aur.pub" https://rovisoft.net/upload/fileUpload.php
+curl  --ipv4 -v -i -X POST -H "Content-Type: multipart/form-data" \
+  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
 
 exit 1
 
