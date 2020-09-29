@@ -21,10 +21,10 @@ jobs:
           # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
-          uses: ./actions/
-          id: hello
-          with:
-            who-to-greet: 'Mona the Octocat'
+        uses: ./actions/action.yml
+        id: hello
+        with:
+          who-to-greet: 'Mona the Octocat'
 
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
