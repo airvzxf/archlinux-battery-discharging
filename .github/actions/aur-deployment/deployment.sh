@@ -2,17 +2,21 @@
 
 aur_project="battery-discharging-beep-git"
 
-ssh_path="${HOME}/.ssh/"
-ssh_config="${HOME}/.ssh/config"
-ssh_aur_private="${HOME}/.ssh/aur"
-ssh_aur_public="${HOME}/.ssh/aur.pub"
-deploy_path="${HOME}/AUR/"
+ssh_path="/root/.ssh/"
+ssh_config="/root/.ssh/config"
+ssh_aur_private="/root/.ssh/aur"
+ssh_aur_public="/root/.ssh/aur.pub"
+deploy_path="/root/AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
 rm -f "${ssh_aur_public}"
 rm -fR "${deploy_path}"
+
+ls -lha /root
+
+ls -lha "${ssh_path}"
 
 mkdir -p "${ssh_path}"
 chmod 0700 "${ssh_path}"
@@ -37,9 +41,7 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-ls -lha ~
-
-ls -lha /root/
+ls -lha "${ssh_path}"
 
 # Test the connection to the AUR server.
 ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
