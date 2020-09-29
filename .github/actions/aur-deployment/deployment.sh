@@ -37,6 +37,10 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
+ls -lha ~
+
+ls -lha /root/
+
 # Test the connection to the AUR server.
 ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 exit 1
