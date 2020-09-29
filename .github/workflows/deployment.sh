@@ -22,15 +22,16 @@ aur_project="battery-discharging-beep-git"
 
 ssh_path="${HOME}/.ssh/"
 ssh_config="${HOME}/.ssh/config"
-ssh_aur="${HOME}/.ssh/aur"
+ssh_aur_private="${HOME}/.ssh/aur"
+ssh_aur_public="${HOME}/.ssh/aur.pub"
 deploy_path="${HOME}/AUR/"
 aur_package="${WORKSPACE_PATH}/arch-aur/"
 echo "aur_package: ${aur_package}"
 
 rm -f "${ssh_config}"
-rm -f "${ssh_aur}"
+rm -f "${ssh_aur_private}"
+rm -f "${ssh_aur_public}"
 rm -fR "${deploy_path}"
-rm -f "${HOME}/.ssh/aur.pub"
 
 mkdir -p "${ssh_path}"
 chmod 0700 "${ssh_path}"
@@ -42,16 +43,19 @@ fi
 
 if ! grep -i "Host aur.archlinux.org" &> /dev/null < "${ssh_config}"; then
   echo "Added host to the ssh config file."
-  echo -e "Host aur.archlinux.org\n  IdentityFile ${ssh_aur}\n  User aur\n" >> "${ssh_config}"
+  echo -e "Host aur.archlinux.org\n  IdentityFile ${ssh_aur_private}\n  User aur\n" >> "${ssh_config}"
 fi
 
 echo "Added the private key into the AUR file."
-echo "${SSH_KEY}" > "${ssh_aur}"
-chmod 0600 "${ssh_aur}"
+echo "${SSH_PRIVATE_KEY}" > "${ssh_aur_private}"
+chmod 0600 "${ssh_aur_private}"
+
+echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
+chmod 0644 "${ssh_aur_public}"
 
 ssh-add -L
-ssh-add "${ssh_aur}"
-ssh -Tv -i "${ssh_aur}" aur@aur.archlinux.org
+ssh-add "${ssh_aur_private}"
+ssh -Tv -i "${ssh_aur_private}" aur@aur.archlinux.org
 
 echo "SSH Config:"
 cat "${ssh_config}"
@@ -70,7 +74,8 @@ cp -f "${aur_package}"* .
 
 cd "${HOME}" || exit
 rm -f "${ssh_config}"
-rm -f "${ssh_aur}"
+rm -f "${ssh_aur_private}"
+rm -f "${ssh_aur_public}"
 rm -fR "${deploy_path}"
 ls -lha "${ssh_path}"
 ls "${HOME}"

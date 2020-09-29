@@ -13,8 +13,8 @@ jobs:
 
       - name: Run a multi-line script
         env:
-          FTP_TEST: ${{ secrets.FTP_TEST }}
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
           ${{ github.workspace }}/.github/workflows/deployment.sh
