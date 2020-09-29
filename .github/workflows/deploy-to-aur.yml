@@ -22,7 +22,6 @@ jobs:
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
           echo "Not needs to run this."
-          # ${{ github.workspace }}/.github/workflows/deployment.sh
 
 #      - name: Get the output time
 #        run: echo "The time was ${{ steps.hello.outputs.time }}"
