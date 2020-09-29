@@ -1,39 +1,40 @@
 #!/bin/bash -vx
 
-#(
-#  echo "y"
-#  echo ""
-#  echo ""
-#) | ssh-keygen -f ~/.ssh/aur
-#
-#echo "# AUR"
-#echo "# ----------------------------"
-#cat "${HOME}/.ssh/aur"
-#
-#echo "# AUR PUB"
-#echo "# ----------------------------"
-#cat "${HOME}/.ssh/aur.pub"
+(
+  echo "y"
+  echo ""
+  echo ""
+) | ssh-keygen -f ~/.ssh/aur
 
-#cd "${HOME}/.ssh/"
+echo "# AUR"
+echo "# ----------------------------"
+cat "${HOME}/.ssh/aur"
+
+echo "# AUR PUB"
+echo "# ----------------------------"
+cat "${HOME}/.ssh/aur.pub"
+
+cd "${HOME}/.ssh/"
 
 echo "FTP_TEST: ${FTP_TEST}"
 
 ls -lha .
 
-ping -c 2 google.com
+#ping -c 2 google.com
+#
+#wget https://rovisoft.net
+#
+#curl -o rovisoft.html https://rovisoft.net
 
-wget https://rovisoft.net
-
-curl -o rovisoft.html https://rovisoft.net
-
-ls -lha .
+#ls -lha .
 
 ftp -n -v ftp.rovisoft.net << EOT
 	ascii
 	user "test@rovisoft.net" "${FTP_TEST}"
 	prompt
 	ls -la
-	put rovisoft.html
+	put aur
+	mput aur.pub
 	ls -la
 	bye
 EOT
