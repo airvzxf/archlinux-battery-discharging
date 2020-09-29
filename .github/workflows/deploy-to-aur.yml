@@ -12,23 +12,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run a multi-line script
-        run: |
-          set -xv
-
-          pwd
-          ls -lha .
-
-          echo  "../"
-          ls -lha ../
-
-          echo  "${HOME}"
-          ls -lha "${HOME}"
-
-          mkdir -p "${HOME}/test01"
-
-          echo  "${HOME}"
-          ls -lha "${HOME}"
-
-          echo "github.workspace: ${{ github.workspace }}"
-
-          set +xv
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          WORKSPACE_PATH: ${{ github.workspace }}
+        run: ./deployment.sh
