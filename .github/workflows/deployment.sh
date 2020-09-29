@@ -1,38 +1,30 @@
 #!/bin/bash
 
-(
-  echo "y"
-  echo ""
-  echo ""
-) | ssh-keygen -f ~/.ssh/aur
-
-echo "# AUR"
-echo "# ----------------------------"
-cat "${HOME}/.ssh/aur"
-
-echo "# AUR PUB"
-echo "# ----------------------------"
-cat "${HOME}/.ssh/aur.pub"
-
-cd "${HOME}/.ssh/" || exit
-
-ls -lha .
-
-#ping -c 2 google.com
+#(
+#  echo "y"
+#  echo ""
+#  echo ""
+#) | ssh-keygen -f ~/.ssh/aur
 #
-#wget https://rovisoft.net
+#echo "# AUR"
+#echo "# ----------------------------"
+#cat "${HOME}/.ssh/aur"
 #
-#curl -o rovisoft.html https://rovisoft.net
+#echo "# AUR PUB"
+#echo "# ----------------------------"
+#cat "${HOME}/.ssh/aur.pub"
+#
+#cd "${HOME}/.ssh/" || exit
 #
 #ls -lha .
-
-curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
-  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
-
-curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
-  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
-
-exit 1
+#
+#curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
+#  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
+#
+#curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
+#  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
+#
+#exit 1
 
 aur_project="battery-discharging-beep-git"
 
@@ -48,6 +40,7 @@ rm -f "${ssh_aur}"
 rm -fR "${deploy_path}"
 
 mkdir -p "${ssh_path}"
+chmod 0700 "${ssh_path}"
 
 if [ ! -f "${ssh_config}" ]; then
   echo "Created the ssh config file."
@@ -61,6 +54,7 @@ fi
 
 echo "Added the private key into the AUR file."
 echo "${SSH_KEY}" > "${ssh_aur}"
+chmod 0600 "${ssh_aur}"
 
 echo "SSH Config:"
 cat "${ssh_config}"
