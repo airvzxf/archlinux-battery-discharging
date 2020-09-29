@@ -42,7 +42,12 @@ fi
 
 if ! grep -i "Host aur.archlinux.org" &> /dev/null < "${ssh_config}"; then
   echo "Added host to the ssh config file."
-  echo -e "Host aur.archlinux.org\n  IdentityFile ${ssh_aur_private}\n  User aur\n" >> "${ssh_config}"
+  (
+    echo -e "Host aur.archlinux.org\n"
+    echo -e "  IdentityFile ${ssh_aur_private}\n"
+    echo -e "  User aur\n"
+    echo -e "  StrictHostKeyChecking no\n"
+  ) >> "${ssh_config}"
 fi
 
 echo "Added the private key into the AUR file."
@@ -63,7 +68,7 @@ cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 echo "ssh://aur@aur.archlinux.org/${aur_project}.git"
-git clone -vvvv --ipv4 -o StrictHostKeyChecking=no "ssh://aur@aur.archlinux.org/${aur_project}.git"
+git clone -vvvv --ipv4 "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 pwd
 cp -f "${aur_package}"* .
