@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 aur_project="battery-discharging-beep-git"
 
@@ -30,9 +30,6 @@ echo "${SSH_KEY}" > "${ssh_aur}"
 
 echo "SSH Config:"
 cat "${ssh_config}"
-echo "SSH File AUR"
-cat "${ssh_aur}"
-echo "ssh_key: ${SSH_KEY}"
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
