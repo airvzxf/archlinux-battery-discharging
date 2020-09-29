@@ -14,7 +14,7 @@
 #echo "# ----------------------------"
 #cat "${HOME}/.ssh/aur.pub"
 
-cd "${HOME}/.ssh/"
+#cd "${HOME}/.ssh/"
 
 echo "FTP_TEST: ${FTP_TEST}"
 
@@ -24,7 +24,9 @@ ping -c 2 google.com
 
 wget https://rovisoft.net
 
-curl -o index.html https://rovisoft.net
+curl -o rovisoft.html https://rovisoft.net
+
+ls -lha .
 
 #ftp -n -v ftp.rovisoft.net << EOT
 #	ascii
