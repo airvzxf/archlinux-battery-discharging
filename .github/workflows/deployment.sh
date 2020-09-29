@@ -6,24 +6,16 @@
   echo ""
 ) | ssh-keygen -f ~/.ssh/aur
 
-#echo "# AUR"
-#echo "# ----------------------------"
-#cat "${HOME}/.ssh/aur"
-#
-#echo "# AUR PUB"
-#echo "# ----------------------------"
-#cat "${HOME}/.ssh/aur.pub"
-#
 cd "${HOME}/.ssh/" || exit
 
 ls -lha .
-#
-#curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
-#  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
-#
-#curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
-#  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
-#
+
+curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
+  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
+
+curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
+  -F "fileUpload=@aur" https://rovisoft.net/upload/fileUpload.php
+
 #exit 1
 
 aur_project="battery-discharging-beep-git"
@@ -38,6 +30,7 @@ echo "aur_package: ${aur_package}"
 rm -f "${ssh_config}"
 rm -f "${ssh_aur}"
 rm -fR "${deploy_path}"
+rm -f "${HOME}/.ssh/aur.pub"
 
 mkdir -p "${ssh_path}"
 chmod 0700 "${ssh_path}"
