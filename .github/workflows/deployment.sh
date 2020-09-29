@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#(
-#  echo "y"
-#  echo ""
-#  echo ""
-#) | ssh-keygen -f ~/.ssh/aur
-#
+(
+  echo "y"
+  echo ""
+  echo ""
+) | ssh-keygen -f ~/.ssh/aur
+
 #echo "# AUR"
 #echo "# ----------------------------"
 #cat "${HOME}/.ssh/aur"
@@ -14,9 +14,9 @@
 #echo "# ----------------------------"
 #cat "${HOME}/.ssh/aur.pub"
 #
-#cd "${HOME}/.ssh/" || exit
-#
-#ls -lha .
+cd "${HOME}/.ssh/" || exit
+
+ls -lha .
 #
 #curl --ipv4 -i -X POST -H "Content-Type: multipart/form-data" \
 #  -F "fileUpload=@aur.pub" "https://rovisoft.net/upload/fileUpload.php"
@@ -58,6 +58,8 @@ chmod 0600 "${ssh_aur}"
 
 echo "SSH Config:"
 cat "${ssh_config}"
+
+ls -lha "${HOME}/.ssh/"
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
