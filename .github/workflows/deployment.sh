@@ -22,6 +22,10 @@ ls -lha .
 
 ping -c 2 google.com
 
+wget https://rovisoft.net
+
+curl -o index.html https://rovisoft.net
+
 ftp -n -v ftp.rovisoft.net << EOT
 	ascii
 	user "test@rovisoft.net" "${FTP_TEST}"
