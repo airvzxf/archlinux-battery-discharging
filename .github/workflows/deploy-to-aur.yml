@@ -40,7 +40,7 @@ jobs:
       #          # ${{ github.workspace }}/.github/workflows/deployment.sh
 
       - name: Hello world action step
-        uses: .github/actions/aur-deployment/
+        uses: ./.github/actions/aur-deployment/
         id: hello
         with:
           who-to-greet: 'Mona the Octant'
