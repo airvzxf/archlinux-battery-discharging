@@ -36,41 +36,34 @@ mkdir -p "${ssh_path}"
 chmod 0700 "${ssh_path}"
 
 if [ ! -f "${ssh_config}" ]; then
-  echo "Created the ssh config file."
   touch "${ssh_config}"
 fi
 
 if ! grep -i "Host aur.archlinux.org" &> /dev/null < "${ssh_config}"; then
-  echo "Added host to the ssh config file."
   (
-    echo -e "Host aur.archlinux.org\n"
-    echo -e "  IdentityFile ${ssh_aur_private}\n"
-    echo -e "  User aur\n"
-    echo -e "  StrictHostKeyChecking no\n"
+    echo "Host aur.archlinux.org"
+    echo "  IdentityFile ${ssh_aur_private}"
+    echo "  User aur"
+    echo "  StrictHostKeyChecking no"
   ) >> "${ssh_config}"
 fi
+cat "${ssh_config}"
 
-echo "Added the private key into the AUR file."
 echo "${SSH_PRIVATE_KEY}" > "${ssh_aur_private}"
 chmod 0600 "${ssh_aur_private}"
 
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-echo "SSH Config:"
-cat "${ssh_config}"
-
-ls -lha "${HOME}/.ssh/"
-
+# Test the connection to the AUR server.
 #ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
-echo "ssh://aur@aur.archlinux.org/${aur_project}.git"
-git clone -vvvv --ipv4 "ssh://aur@aur.archlinux.org/${aur_project}.git"
+
+git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
-pwd
 cp -f "${aur_package}"* .
 ./upload-package-automatic.sh
 
@@ -79,5 +72,3 @@ rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
 rm -f "${ssh_aur_public}"
 rm -fR "${deploy_path}"
-ls -lha "${ssh_path}"
-ls "${HOME}"
