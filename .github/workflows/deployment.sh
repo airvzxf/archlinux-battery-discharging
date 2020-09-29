@@ -65,7 +65,7 @@ cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 echo "ssh://aur@aur.archlinux.org/${aur_project}.git"
-git clone -v "ssh://aur@aur.archlinux.org/${aur_project}.git"
+git clone -v --ipv4 "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 pwd
 cp -f "${aur_package}"* .
