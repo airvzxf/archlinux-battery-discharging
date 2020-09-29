@@ -6,7 +6,4 @@ echo "Hello #2 ${ISRAEL}"
 find / -iname "arch-aur" 2> /dev/null
 find / -iname "PKGBUILD" 2> /dev/null
 
-ls -lha /
-ls -lha /github/
-ls -lha /github/workspace/
-ls -lha /github/workspace/arch-aur/
+ls -lhaR /github/
