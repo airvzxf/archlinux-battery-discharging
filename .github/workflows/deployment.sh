@@ -26,7 +26,6 @@ ssh_aur_private="${HOME}/.ssh/aur"
 ssh_aur_public="${HOME}/.ssh/aur.pub"
 deploy_path="${HOME}/AUR/"
 aur_package="${WORKSPACE_PATH}/arch-aur/"
-echo "aur_package: ${aur_package}"
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
@@ -53,14 +52,16 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-ssh-add -L
-ssh-add "${ssh_aur_private}"
-ssh -Tv -i "${ssh_aur_private}" aur@aur.archlinux.org
-
 echo "SSH Config:"
 cat "${ssh_config}"
 
 ls -lha "${HOME}/.ssh/"
+
+ssh-add -L
+ssh-add "${ssh_aur_private}"
+ssh -Tv -i "${ssh_aur_private}" aur@aur.archlinux.org
+
+exit 2
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
