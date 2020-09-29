@@ -1,7 +1,5 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'AUR Deployment'
+description: 'Deploy from this local source to the AUR servers.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-#  args:
-#    - ${{ inputs.who-to-greet }}
