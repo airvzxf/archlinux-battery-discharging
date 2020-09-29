@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 aur_project="battery-discharging-beep-git"
 
@@ -38,8 +38,8 @@ echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
 # Test the connection to the AUR server.
-#ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
-
+ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
+exit 1
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
