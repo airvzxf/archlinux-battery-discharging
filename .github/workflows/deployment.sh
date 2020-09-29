@@ -1,4 +1,4 @@
-#!/bin/bash -exv
+#!/bin/bash -e
 
 aur_project="battery-discharging-beep-git"
 
@@ -6,8 +6,9 @@ ssh_path="${HOME}/.ssh/"
 ssh_config="${HOME}/.ssh/config"
 ssh_aur="${HOME}/.ssh/aur"
 deploy_path="${HOME}/AUR/"
-aur_package="${github.workspace}/arch-aur/"
-exit 1
+aur_package="${WORKSPACE_PATH}/arch-aur/"
+echo "aur_package: ${aur_package}"
+
 rm -f "${ssh_config}"
 rm -f "${ssh_aur}"
 rm -fR "${deploy_path}"
@@ -25,16 +26,18 @@ if ! grep -i "Host aur.archlinux.org" &> /dev/null < "${ssh_config}"; then
 fi
 
 echo "Added the private key into the AUR file."
-echo "${secrets.SSH_PRIVATE_KEY}" > "${ssh_aur}"
+echo "${SSH_KEY}" > "${ssh_aur}"
 
 echo "SSH Config:"
 cat "${ssh_config}"
+echo "SSH File AUR"
 cat "${ssh_aur}"
-echo "ssh_key: ${secrets.SSH_PRIVATE_KEY}"
+echo "ssh_key: ${SSH_KEY}"
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
+echo "ssh://aur@aur.archlinux.org/${aur_project}.git"
 git clone "ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 pwd
