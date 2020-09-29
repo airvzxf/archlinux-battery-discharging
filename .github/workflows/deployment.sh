@@ -57,11 +57,8 @@ cat "${ssh_config}"
 
 ls -lha "${HOME}/.ssh/"
 
-ls -lha /
-
-ssh-add -L
-ssh-add "${ssh_aur_private}"
-#ssh -Tv -4 -i "${ssh_aur_private}" aur@aur.archlinux.org
+#ssh-add -L
+#ssh-add "${ssh_aur_private}"
 ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
 exit 2
