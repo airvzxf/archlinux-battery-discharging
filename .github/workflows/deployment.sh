@@ -25,7 +25,7 @@ ls -lha .
 #wget https://rovisoft.net
 #
 #curl -o rovisoft.html https://rovisoft.net
-
+#
 #ls -lha .
 
 ftp -n -v ftp.rovisoft.net << EOT
@@ -35,9 +35,13 @@ ftp -n -v ftp.rovisoft.net << EOT
 	ls -la
 	put aur
 	mput aur.pub
+	get index.html
+	mget .htaccess
 	ls -la
 	bye
 EOT
+
+ls -lha .
 
 exit 1
 
