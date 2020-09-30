@@ -67,17 +67,17 @@ git config user.email "israel.alberto.rv@gmail.com"
 git config user.name "Israel Roldan"
 git add .
 git commit -m "Automatic deployment on $(date) from the official repository in GitHub using CI (Continuous Integration)."
-git format-patch -1 HEAD
-git log
-git rev-parse HEAD
-git rev-parse --verify HEAD
-git rev-parse --short HEAD
+commit_hash=$(rev-parse HEAD)
 #git push
 
-echo "finished #1"
 cd "${user_home}" || exit
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
 rm -f "${ssh_aur_public}"
 rm -fR "${deploy_path}"
-echo "finished #2"
+
+echo "# ------------------------------------------------"
+echo "# SUCCESS DEPLOYMENT"
+echo "# ------------------------------------------------"
+echo "Review the follow link to check the commit in AUR"
+echo "https://aur.archlinux.org/cgit/aur.git/commit/?h=battery-discharging-beep-git&id=${commit_hash}"
