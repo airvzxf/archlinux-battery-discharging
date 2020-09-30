@@ -47,8 +47,11 @@ chmod 0644 "${ssh_aur_public}"
 
 #chown -R "${user}":"${user}" "${ssh_path}"
 
+# Wait until the connection of the Internet is available.
+#curl -f https://www.google.com/
+
 # Test the connection to the AUR server.
-#ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
+ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
@@ -56,7 +59,6 @@ chown -R "${user}":"${user}" "${deploy_path}"
 ls -lha .
 
 cd "${deploy_path}" || exit
-#curl -o index.html https://rovisoft.net
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
 exit 0
