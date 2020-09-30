@@ -67,7 +67,7 @@ git config user.email "israel.alberto.rv@gmail.com"
 git config user.name "Israel Roldan"
 git add .
 git commit -m "Automatic deployment on $(date) from the official repository in GitHub using CI (Continuous Integration)."
-commit_hash=$(rev-parse HEAD)
+commit_hash=$(git rev-parse HEAD)
 #git push
 
 cd "${user_home}" || exit
