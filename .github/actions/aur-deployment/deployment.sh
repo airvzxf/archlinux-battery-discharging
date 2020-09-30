@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 aur_project="battery-discharging-beep-git"
 temporal_password="a"
