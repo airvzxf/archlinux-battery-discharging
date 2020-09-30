@@ -48,7 +48,7 @@ chmod 0644 "${ssh_aur_public}"
 #chown -R "${user}":"${user}" "${ssh_path}"
 
 # Wait until the connection of the Internet is available.
-curl -f https://www.google.com/ &> /dev/null
+curl -f https://aur.archlinux.org/ &> /dev/null
 
 # Test the connection to the AUR server.
 #ssh -Tv -4 aur@aur.archlinux.org
@@ -68,7 +68,7 @@ ls -lha .
 chown -R "${user}":"${user}" "${deploy_path}"
 ls -lha .
 
-echo "${temporal_password}" | su - "${user}" -c "cd ${aur_project}; makepkg -f"
+echo "${temporal_password}" | su - "${user}" -c "cd ${aur_project}; ls -lha .; pwd; makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 makepkg --printsrcinfo > .SRCINFO
 git diff --exit-code
