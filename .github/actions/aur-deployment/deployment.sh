@@ -56,10 +56,10 @@ chown -R "${user}":"${user}" "${deploy_path}"
 ls -lha .
 
 cd "${deploy_path}" || exit
-ping -4 -c 3 www.google.com
+ping -6 -c 3 www.google.com
+exit 0
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
-exit 0
 
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
