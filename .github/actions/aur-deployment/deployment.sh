@@ -68,6 +68,7 @@ git config user.name "Israel Roldan"
 git add .
 git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
 git format-patch -1 HEAD
+git log
 #git push
 
 echo "finished #1"
