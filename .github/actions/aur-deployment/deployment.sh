@@ -42,16 +42,16 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-chown -R immortal:immortal "${ssh_path}"
+#chown -R immortal:immortal "${ssh_path}"
 
 # Test the connection to the AUR server.
-#echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
+echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 
-echo "${temporal_password}" | su - immortal -c "git clone -vvvv ssh://aur@aur.archlinux.org/${aur_project}.git"
+git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
