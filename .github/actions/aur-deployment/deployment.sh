@@ -43,8 +43,7 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-chown -R immortal "${ssh_path}"
-chgrp -R immortal "${ssh_path}"
+chown -R immortal:immortal "${ssh_path}"
 
 ls -lha /home/immortal/
 ls -lha /home/immortal/.ssh/
