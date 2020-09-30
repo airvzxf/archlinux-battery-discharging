@@ -69,6 +69,9 @@ git add .
 git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
 git format-patch -1 HEAD
 git log
+git rev-parse HEAD
+git rev-parse --verify HEAD
+git rev-parse --short HEAD
 #git push
 
 echo "finished #1"
