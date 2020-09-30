@@ -1,8 +1,8 @@
 name: CI -> Deploy to AUR
 
 on:
-  push:
-    branches: [ master ]
+  release:
+    types: published
 
 jobs:
   build:
