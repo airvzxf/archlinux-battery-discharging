@@ -66,7 +66,7 @@ echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; ma
 git config user.email "israel.alberto.rv@gmail.com"
 git config user.name "Israel Roldan"
 git add .
-git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
+git commit -m "Automatic deployment on $(date) from the official repository in GitHub using CI (Continuous Integration)."
 git format-patch -1 HEAD
 git log
 git rev-parse HEAD
