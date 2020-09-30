@@ -52,7 +52,7 @@ echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/"
 echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/.ssh/"
 
 # Test the connection to the AUR server.
-echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
+#echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
