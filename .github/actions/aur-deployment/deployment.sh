@@ -4,11 +4,11 @@ aur_project="battery-discharging-beep-git"
 temporal_password="a"
 
 user_home="/home/immortal/"
-ssh_path="/home/immortal/.ssh/"
-ssh_config="/home/immortal/.ssh/config"
-ssh_aur_private="/home/immortal/.ssh/aur"
-ssh_aur_public="/home/immortal/.ssh/aur.pub"
-deploy_path="/home/immortal/AUR/"
+ssh_path="${user_home}.ssh/"
+ssh_config="${user_home}.ssh/config"
+ssh_aur_private="${user_home}.ssh/aur"
+ssh_aur_public="${user_home}.ssh/aur.pub"
+deploy_path="${user_home}AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
 useradd -m immortal
@@ -45,11 +45,6 @@ echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
 chown -R immortal:immortal "${ssh_path}"
-
-ls -lha /home/immortal/
-ls -lha /home/immortal/.ssh/
-echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/"
-echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/.ssh/"
 
 # Test the connection to the AUR server.
 #echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
