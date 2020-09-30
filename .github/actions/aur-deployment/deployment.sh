@@ -64,6 +64,10 @@ ls -lha .
 
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
+ls -lha .
+chown -R "${user}":"${user}" "${deploy_path}"
+ls -lha .
+
 echo "${temporal_password}" | su - "${user}" -c "makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 makepkg --printsrcinfo > .SRCINFO
