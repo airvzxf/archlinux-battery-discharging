@@ -43,9 +43,13 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-ls -lha /home/
+chown -R immortal "${ssh_path}"
+chgrp -R immortal "${ssh_path}"
+
 ls -lha /home/immortal/
+ls -lha /home/immortal/.ssh/
 echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/"
+echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/.ssh/"
 
 # Test the connection to the AUR server.
 echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org"
