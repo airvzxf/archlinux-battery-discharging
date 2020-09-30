@@ -61,7 +61,6 @@ ls -lha .
 cd "${deploy_path}" || exit
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
-exit 0
 
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
