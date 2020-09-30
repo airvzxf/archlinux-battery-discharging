@@ -48,7 +48,7 @@ chmod 0644 "${ssh_aur_public}"
 #chown -R "${user}":"${user}" "${ssh_path}"
 
 # Wait until the connection of the Internet is available.
-curl -f https://www.google.com/
+curl -f https://www.google.com/ &> /dev/null
 
 # Test the connection to the AUR server.
 ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
