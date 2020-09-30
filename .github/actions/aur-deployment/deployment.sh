@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 
 aur_project="battery-discharging-beep-git"
+new_user_password="a"
 
 ssh_path="/home/immortal/.ssh/"
 ssh_config="/home/immortal/.ssh/config"
@@ -8,10 +9,9 @@ ssh_aur_private="/home/immortal/.ssh/aur"
 ssh_aur_public="/home/immortal/.ssh/aur.pub"
 deploy_path="/home/immortal/AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
-user_password="a"
 
 useradd -m immortal
-echo -e "${user_password}\n${user_password}" | passwd immortal
+echo -e "${new_user_password}\n${new_user_password}" | passwd immortal
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
@@ -42,16 +42,16 @@ echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
 # Test the connection to the AUR server.
-#echo "${user_password}" | su - immortal -c "ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org"
+echo "${new_user_password}" | su - immortal -c "ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org"
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 
-echo "${user_password}" | su - immortal -c 'git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"'
+echo "${new_user_password}" | su - immortal -c 'git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"'
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
-echo "${user_password}" | su - immortal -c "makepkg -f"
+echo "${new_user_password}" | su - immortal -c "makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 makepkg --printsrcinfo > .SRCINFO
 git diff --exit-code
