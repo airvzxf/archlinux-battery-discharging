@@ -69,8 +69,10 @@ git status
 #git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
 #git push
 
+echo "finished #1"
 cd "${user_home}" || exit
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
 rm -f "${ssh_aur_public}"
 rm -fR "${deploy_path}"
+echo "finished #2"
