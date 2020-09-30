@@ -14,8 +14,6 @@ aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 useradd -m immortal
 echo -e "${temporal_password}\n${temporal_password}" | passwd immortal
 
-grep -i "bash" < /etc/passwd
-
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
 rm -f "${ssh_aur_public}"
@@ -54,6 +52,7 @@ mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 
 echo "${temporal_password}" | su - immortal -c "git clone -vvvv ssh://aur@aur.archlinux.org/${aur_project}.git"
+ls -lha .
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
 echo "${temporal_password}" | su - immortal -c "makepkg -f"
