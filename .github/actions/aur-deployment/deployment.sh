@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 aur_project="battery-discharging-beep-git"
-temporal_password="a"
+password="a"
 
 ssh_path="/root/.ssh/"
 ssh_config="/root/.ssh/config"
@@ -12,10 +12,8 @@ user_home="/home/${user}/"
 deploy_path="${user_home}AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
-echo "HOME: ${HOME}"
-
 useradd -m "${user}"
-echo -e "${temporal_password}\n${temporal_password}" | passwd "${user}" &> /dev/null
+echo -e "${password}\n${password}" | passwd "${user}" &> /dev/null
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
@@ -45,8 +43,6 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-#chown -R "${user}":"${user}" "${ssh_path}"
-
 # Wait until the connection of the Internet is available.
 curl -f https://aur.archlinux.org/ &> /dev/null
 
@@ -56,21 +52,17 @@ curl -f https://aur.archlinux.org/ &> /dev/null
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
 chown -R "${user}":"${user}" "${deploy_path}"
-ls -lha .
 
 cd "${deploy_path}" || exit
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
-ls -lha .
 
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
-ls -lha .
 chown -R "${user}":"${user}" "${deploy_path}"
-ls -lha .
 
-echo "${temporal_password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; ls -lha .; pwd; makepkg -f"
+echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
-makepkg --printsrcinfo > .SRCINFO
+echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg --printsrcinfo > .SRCINFO"
 git diff --exit-code
 git add .
 git status
