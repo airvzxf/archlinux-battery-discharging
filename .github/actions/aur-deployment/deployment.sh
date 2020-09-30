@@ -68,7 +68,7 @@ ls -lha .
 chown -R "${user}":"${user}" "${deploy_path}"
 ls -lha .
 
-echo "${temporal_password}" | su - "${user}" -c "cd ${aur_project}; ls -lha .; pwd; makepkg -f"
+echo "${temporal_password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; ls -lha .; pwd; makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 makepkg --printsrcinfo > .SRCINFO
 git diff --exit-code
