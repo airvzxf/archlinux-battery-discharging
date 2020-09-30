@@ -42,7 +42,7 @@ echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
 # Test the connection to the AUR server.
-echo "${user_password}" | su - immortal -c "ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org"
+#echo "${user_password}" | su - immortal -c "ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org"
 
 cd "${HOME}" || exit
 mkdir -p "${deploy_path}"
