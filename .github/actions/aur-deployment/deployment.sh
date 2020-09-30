@@ -51,7 +51,7 @@ chmod 0644 "${ssh_aur_public}"
 curl -f https://www.google.com/ &> /dev/null
 
 # Test the connection to the AUR server.
-ssh -Tv -4 -o aur@aur.archlinux.org
+#ssh -Tv -4 -o aur@aur.archlinux.org
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
