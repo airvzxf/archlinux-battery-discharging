@@ -15,7 +15,7 @@ aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 echo "HOME: ${HOME}"
 
 useradd -m "${user}"
-echo -e "${temporal_password}\n${temporal_password}" | passwd "${user}"
+echo -e "${temporal_password}\n${temporal_password}" | passwd "${user}" &> /dev/null
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
