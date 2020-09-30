@@ -63,8 +63,8 @@ chown -R "${user}":"${user}" "${deploy_path}"
 echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg --printsrcinfo > .SRCINFO"
-git diff --exit-code 2> /dev/null
-#git add . 2> /dev/null
+#git diff --exit-code 2> /dev/null
+git add . 2> /dev/null
 #git status 2> /dev/null
 
 #git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
