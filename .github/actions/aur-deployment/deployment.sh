@@ -3,10 +3,10 @@
 aur_project="battery-discharging-beep-git"
 temporal_password="a"
 
-ssh_path="${HOME}/.ssh/"
-ssh_config="${HOME}/.ssh/config"
-ssh_aur_private="${HOME}/.ssh/aur"
-ssh_aur_public="${HOME}/.ssh/aur.pub"
+ssh_path="/root/.ssh/"
+ssh_config="/root/.ssh/config"
+ssh_aur_private="/root/.ssh/aur"
+ssh_aur_public="/root/.ssh/aur.pub"
 user="immortal"
 user_home="/home/${user}/"
 deploy_path="${user_home}AUR/"
@@ -48,13 +48,13 @@ chmod 0644 "${ssh_aur_public}"
 #chown -R "${user}":"${user}" "${ssh_path}"
 
 # Test the connection to the AUR server.
-ssh -Tv -4 aur@aur.archlinux.org
+ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
 chown -R "${user}":"${user}" "${deploy_path}"
 ls -lha .
-
+exit 0
 cd "${deploy_path}" || exit
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
