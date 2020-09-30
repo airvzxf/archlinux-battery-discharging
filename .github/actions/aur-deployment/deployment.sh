@@ -3,16 +3,17 @@
 aur_project="battery-discharging-beep-git"
 temporal_password="a"
 
-user_home="/home/immortal/"
-ssh_path="${user_home}.ssh/"
-ssh_config="${user_home}.ssh/config"
-ssh_aur_private="${user_home}.ssh/aur"
-ssh_aur_public="${user_home}.ssh/aur.pub"
+ssh_path="/root/.ssh/"
+ssh_config="/root/.ssh/config"
+ssh_aur_private="/root/.ssh/aur"
+ssh_aur_public="/root/.ssh/aur.pub"
+user="immortal"
+user_home="/home/${user}/"
 deploy_path="${user_home}AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
-useradd -m immortal
-echo -e "${temporal_password}\n${temporal_password}" | passwd immortal
+useradd -m "${user}"
+echo -e "${temporal_password}\n${temporal_password}" | passwd "${user}"
 
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
@@ -42,10 +43,10 @@ chmod 0600 "${ssh_aur_private}"
 echo "${SSH_PUBLIC_KEY}" > "${ssh_aur_public}"
 chmod 0644 "${ssh_aur_public}"
 
-#chown -R immortal:immortal "${ssh_path}"
+#chown -R "${user}":"${user}" "${ssh_path}"
 
 # Test the connection to the AUR server.
-echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
+echo "${temporal_password}" | su - "${user}" -c "ssh -Tv -4 aur@aur.archlinux.org"
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
@@ -55,7 +56,7 @@ git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
-echo "${temporal_password}" | su - immortal -c "makepkg -f"
+echo "${temporal_password}" | su - "${user}" -c "makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 makepkg --printsrcinfo > .SRCINFO
 git diff --exit-code
