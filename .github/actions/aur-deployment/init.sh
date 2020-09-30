@@ -1,4 +1,0 @@
-#!/bin/sh -ex
-
-echo "SSH_PUBLIC_KEY: ${SSH_PUBLIC_KEY}"
-echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"

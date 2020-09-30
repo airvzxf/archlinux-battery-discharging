@@ -35,7 +35,6 @@ if ! grep -i "Host aur.archlinux.org" &> /dev/null < "${ssh_config}"; then
     echo "  StrictHostKeyChecking no"
   ) >> "${ssh_config}"
 fi
-cat "${ssh_config}"
 
 echo "${SSH_PRIVATE_KEY}" > "${ssh_aur_private}"
 chmod 0600 "${ssh_aur_private}"
@@ -54,7 +53,7 @@ mkdir -p "${deploy_path}"
 chown -R "${user}":"${user}" "${deploy_path}"
 
 cd "${deploy_path}" || exit
-git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
+git clone "ssh://aur@aur.archlinux.org/${aur_project}.git"
 
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
@@ -68,7 +67,7 @@ git config user.name "Israel Roldan"
 git add .
 git commit -m "Automatic deployment on $(date) from the official repository in GitHub using CI (Continuous Integration)."
 commit_hash=$(git rev-parse HEAD)
-#git push
+git push
 
 cd "${user_home}" || exit
 rm -f "${ssh_config}"
@@ -79,5 +78,5 @@ rm -fR "${deploy_path}"
 echo "# ------------------------------------------------"
 echo "# SUCCESS DEPLOYMENT"
 echo "# ------------------------------------------------"
-echo "Review the follow link to check the commit in AUR"
+echo "Review this link to check the commit in the AUR"
 echo "https://aur.archlinux.org/cgit/aur.git/commit/?h=battery-discharging-beep-git&id=${commit_hash}"
