@@ -65,6 +65,7 @@ rm -fR battery-discharging-beep* pkg src .SRCINFO
 echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg --printsrcinfo > .SRCINFO"
 git add .
 git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
+git format-patch -1 HEAD
 #git push
 
 echo "finished #1"
