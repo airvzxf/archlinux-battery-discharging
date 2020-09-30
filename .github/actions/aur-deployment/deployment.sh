@@ -3,6 +3,7 @@
 aur_project="battery-discharging-beep-git"
 temporal_password="a"
 
+user_home="/home/immortal/"
 ssh_path="/home/immortal/.ssh/"
 ssh_config="/home/immortal/.ssh/config"
 ssh_aur_private="/home/immortal/.ssh/aur"
@@ -51,13 +52,13 @@ echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/"
 echo "${temporal_password}" | su - immortal -c "ls -lha /home/immortal/.ssh/"
 
 # Test the connection to the AUR server.
-echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org"
+echo "${temporal_password}" | su - immortal -c "ssh -Tv -4 aur@aur.archlinux.org"
 
-cd "${HOME}" || exit
+cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
 cd "${deploy_path}" || exit
 
-echo "${temporal_password}" | su - immortal -c 'git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"'
+echo "${temporal_password}" | su - immortal -c "git clone -vvvv ssh://aur@aur.archlinux.org/${aur_project}.git"
 cd "${aur_project}" || exit
 cp -f "${aur_package}"* .
 echo "${temporal_password}" | su - immortal -c "makepkg -f"
@@ -69,7 +70,7 @@ git status
 #git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
 #git push
 
-cd "${HOME}" || exit
+cd "${user_home}" || exit
 rm -f "${ssh_config}"
 rm -f "${ssh_aur_private}"
 rm -f "${ssh_aur_public}"
