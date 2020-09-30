@@ -63,6 +63,8 @@ chown -R "${user}":"${user}" "${deploy_path}"
 echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg -f"
 rm -fR battery-discharging-beep* pkg src .SRCINFO
 echo "${password}" | su - "${user}" -c "cd ${deploy_path}; cd ${aur_project}; makepkg --printsrcinfo > .SRCINFO"
+git config user.email "israel.alberto.rv@gmail.com"
+git config user.name "Israel Roldan"
 git add .
 git commit -m "Automatic deployment coming from the official repository in GitHub using CI (Continuous Integration)."
 git format-patch -1 HEAD
