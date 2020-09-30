@@ -12,6 +12,8 @@ user_home="/home/${user}/"
 deploy_path="${user_home}AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
+echo "HOME: ${HOME}"
+
 useradd -m "${user}"
 echo -e "${temporal_password}\n${temporal_password}" | passwd "${user}"
 
@@ -46,7 +48,7 @@ chmod 0644 "${ssh_aur_public}"
 #chown -R "${user}":"${user}" "${ssh_path}"
 
 # Test the connection to the AUR server.
-#ssh -Tv -4 "aur@aur.archlinux.org"
+ssh -Tv -4 aur@aur.archlinux.org
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
