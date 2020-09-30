@@ -46,7 +46,7 @@ chmod 0644 "${ssh_aur_public}"
 #chown -R "${user}":"${user}" "${ssh_path}"
 
 # Test the connection to the AUR server.
-ssh -Tv -4 "aur@aur.archlinux.org"
+#ssh -Tv -4 "aur@aur.archlinux.org"
 
 cd "${user_home}" || exit
 mkdir -p "${deploy_path}"
