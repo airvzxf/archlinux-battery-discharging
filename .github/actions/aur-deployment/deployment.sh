@@ -50,11 +50,12 @@ chmod 0644 "${ssh_aur_public}"
 # Test the connection to the AUR server.
 ssh -Tv -4 -o StrictHostKeyChecking=no aur@aur.archlinux.org
 
-cd "${user_home}" || exit
-mkdir -p "${deploy_path}"
-chown -R "${user}":"${user}" "${deploy_path}"
+#cd "${user_home}" || exit
+#mkdir -p "${deploy_path}"
+#chown -R "${user}":"${user}" "${deploy_path}"
 ls -lha .
 exit 0
+
 cd "${deploy_path}" || exit
 git clone -vvvv "ssh://aur@aur.archlinux.org/${aur_project}.git"
 ls -lha .
