@@ -9,6 +9,6 @@ RUN ["/bin/chmod", "+x", "/app/init.sh"]
 RUN pacman -Sy --noconfirm &&\
     pacman -S pacman --noconfirm &&\
     pacman-db-upgrade &&\
-    pacman -S --noconfirm openssh git
+    pacman -S --noconfirm openssh git iputils
 
 ENTRYPOINT ["/app/init.sh"]
