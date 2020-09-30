@@ -9,16 +9,16 @@ ssh_aur_public="/root/.ssh/aur.pub"
 deploy_path="/root/AUR/"
 aur_package="${GITHUB_WORKSPACE}/arch-aur/"
 
+
 whoami
 useradd -m immortal
+
+echo -e "a\na" | sudo passwd immortal
+
+echo "a" | su - immortal -c "whoami; echo HOME: \${HOME}; ls -lha ~;exit;"
+
 echo "HOME: ${HOME}"
 ls -la /home/
-
-su - immortal
-whoami
-echo "HOME: ${HOME}"
-ls -lha .
-exit
 
 exit 1
 
