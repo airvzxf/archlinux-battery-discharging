@@ -22,17 +22,17 @@ Command-line tool that makes a sound whenever the computer's battery is not conn
 
 ### OPTIONS:
 
-| **Abbr** | **Long**         | **Information**                                                                                                                                                                                                            |
-|----------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -d       | --duration       | The duration of the beep.<br> - Required: no<br> - Type: integer \| float<br> - Values: 1<br> - Default: 0.2                                                                                                               |
-| -f       | --frequency      | The frequency of the beep. Low values are low sounds, and high values are high sounds.<br> - Required: no<br> - Type: integer<br> - Values: 1500<br> - Default: 2000                                                       |
-| -h       | --help           | Display information for this command and exit.<br> - Required: no<br> - Type: none<br> - Values: none<br> - Default: none                                                                                                  |
-| -p       | --path           | The path of the directory where the list of power supply devices is located.<br> - Required: no<br> - Type: string<br> - Values: /dev/battery<br> - Default: /sys/class/power_supply                                       |
-| -s       | --status         | Linux stores the battery status in a file.<br>Text that must match within the battery file.<br>The text is not case-sensitive.<br> - Required: no<br> - Type: string<br> - Values: Disconnected<br> - Default: Discharging |
-| -t       | --test           | Try the beep a certain number of times and exit.<br>This is used with the `--duration`, `--frequency` and `--wait` options.<br> - Required: no<br> - Type: integer<br> - Values: 15<br> - Default: 3                       |
-| -v       | --version        | Display the version of this tool along with the project information and exit.<br> - Required: no<br> - Type: none<br> - Values: none<br> - Default: none                                                                   |
-|          | --version-simple | Display the version of this tool and exit.<br> - Required: no<br> - Type: none<br> - Values: none<br> - Default: none                                                                                                      |
-| -w       | --wait           | Waiting time between one beep and another.<br> - Required: no<br> - Type: integer \| float<br> - Values: 5<br> - Default: 2.5                                                                                              |
+| **Abbr** | **Long**         | **Information**                                                                                                                                                                                                                                                                                                      |
+|----------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -d       | --duration       | The duration of the beep.<br> - Required: no<br> - Type: integer \| float<br> - Values: 1<br> - Default: 0.2                                                                                                                                                                                                         |
+| -f       | --frequency      | The frequency of the beep. Low values are low sounds, and high values are high sounds.<br> - Required: no<br> - Type: integer<br> - Values: 1500<br> - Default: 2000                                                                                                                                                 |
+| -h       | --help           | Display information for this command and exit.<br> - Required: no<br> - Type: none<br> - Values: none<br> - Default: none                                                                                                                                                                                            |
+| -p       | --path           | The path of the directory where the list of power supply devices is located.<br> - Required: no<br> - Type: string<br> - Values: /dev/battery<br> - Default: /sys/class/power_supply                                                                                                                                 |
+| -s       | --status         | Linux stores the battery status in a file.<br>Text that must match within the battery file.<br>The text is not case-sensitive.<br> - Required: no<br> - Type: string<br> - Values: Disconnected<br> - Default: Discharging                                                                                           |
+| -t       | --test           | Try the beep a certain number of times and exit.<br>This is used with the `--duration`, `--frequency` and `--wait` options.<br>Note: This option must go at the end of the other options. Otherwise, the other options will have no effect.<br> - Required: no<br> - Type: integer<br> - Values: 15<br> - Default: 3 |
+| -v       | --version        | Display the version of this tool along with the project information and exit.<br> - Required: no<br> - Type: none<br> - Values: none<br> - Default: none                                                                                                                                                             |
+|          | --version-simple | Display the version of this tool and exit.<br> - Required: no<br> - Type: none<br> - Values: none<br> - Default: none                                                                                                                                                                                                |
+| -w       | --wait           | Waiting time between one beep and another.<br> - Required: no<br> - Type: integer \| float<br> - Values: 5<br> - Default: 2.5                                                                                                                                                                                        |
 
 ### EXAMPLES:
 
@@ -43,6 +43,7 @@ Command-line tool that makes a sound whenever the computer's battery is not conn
 
 - Test the beep six times with a frequency of 1250, a duration of 0.5 seconds,
   and a wait between each beep of 1.3 seconds.
+    - **Note:** This option must go at the end of the other options. Otherwise, the other options will have no effect.
     - Commands:
         - `battery-discharging --frequency 1250 --duration 0.5 --wait 1.3 --test 6`
         - `battery-discharging -f 1250 -d 0.5 -w 1.3 -t 6`
