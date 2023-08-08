@@ -1,0 +1,23 @@
+ENV_PACKAGE_INFORMATION
+
+# PKGBUILD variables.
+pkgname=ENV_PACKAGE_NAME
+pkgver=AUTO_PACKAGE_VERSION
+pkgrel=1
+pkgdesc='ENV_PACKAGE_DESCRIPTION'
+arch=(ENV_PACKAGE_ARCHITECTURES)
+url='AUTO_GITHUB_URL'
+license=(ENV_PACKAGE_LICENSES)
+depends=(ENV_PACKAGE_DEPENDENCIES)
+source=(AUTO_PACKAGE_SOURCES)
+md5sums=(AUTO_PACKAGE_SUMS)
+validpgpkeys=(ENV_PACKAGE_PGPS)
+
+# PKGBUILD functions.
+package() {
+  cd "${srcdir}/AUTO_SOURCE_DOWNLOADED" || return
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/ENV_PACKAGE_NAME/README.md"
+
+  cd "src" || return
+  install -Dm755 "ENV_PACKAGE_NAME" "${pkgdir}/usr/bin/ENV_PACKAGE_NAME"
+}

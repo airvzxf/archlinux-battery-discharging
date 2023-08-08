@@ -1,4 +1,4 @@
-name: CI -> Deploy to AUR
+name: CI ➟ Deploy to AUR
 
 on:
   release:
@@ -9,10 +9,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Update the AUR package and Commit the changes via Git
+      - name: Update the AUR package and commit the changes via Git
         uses: ./.github/actions/aur-deployment/
         env:
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ENV_IS_PRODUCTION: 'false'
+          ENV_GITHUB_OWNER: ${{ github.repository_owner }}
+          ENV_GITHUB_REPOSITORY: ${{ github.event.repository.name }}
+          ENV_GITHUB_TAG_VERSION: ${{ github.event.release.tag_name }}
+          ENV_GITHUB_TAG_VERSION_PREFIX: 'v'
+          ENV_GITHUB_TAG_VERSION_SUFFIX: ''
+          ENV_GIT_USER_EMAIL: 'israel.alberto.rv@gmail.com'
+          ENV_GIT_USER_NAME: 'Israel Roldan'
+          ENV_PACKAGE_ARCHITECTURES: 'x86_64'
+          ENV_PACKAGE_DEPENDENCIES: '|  bash|  coreutils|  grep|  alsa-utils|  util-linux|'
+          ENV_PACKAGE_DESCRIPTION: 'Command-line tool that makes a sound whenever the computer battery is not connected to electrical power.'
+          ENV_PACKAGE_INFORMATION: '# Maintainer: Israel Roldan <israel.alberto.rv@gmail.com>|# Contributor: Israel Roldan <israel.alberto.rv@gmail.com>'
+          ENV_PACKAGE_LICENSES: 'GPL3'
+          ENV_PACKAGE_NAME: 'battery-discharging'
+          ENV_PACKAGE_PGPS: '|  63ADA633FE7468630D9BC56175530B8B9F74CF3A # PGP: Israel Roldan (airvzxf) <israel.alberto.rv@gmail.com>, https://github.com/airvzxf.gpg|'
+          ENV_PACKAGE_RELEASE: '1'
+          ENV_PACKAGE_SOURCES: ''
+          ENV_PACKAGE_SOURCE_GITHUB: 'true'
+          ENV_SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ENV_SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}

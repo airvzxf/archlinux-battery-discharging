@@ -1,0 +1,287 @@
+#!/usr/bin/env bash
+set -e
+set +xv
+
+VERSION="v1.0.0"
+BATTERY_STATUS="Discharging"
+BEEP_WAIT_SECONDS="2.5"
+POWER_SUPPLY_PATH="/sys/class/power_supply"
+SOUND_DURATION="0.2"
+SOUND_FREQUENCY="2000"
+TEST_TIMES="3"
+
+display_help() {
+  echo ""
+  echo "USAGE:"
+  echo "  battery-discharging [OPTIONS]"
+  echo ""
+  echo "DESCRIPTION"
+  echo "  Command-line tool that makes a sound whenever the computer's battery is not"
+  echo "  connected to electrical power."
+  echo ""
+  echo "  RECOMMENDATION:"
+  echo "    Run this tool in the background so that it detects the absence of electrical"
+  echo "    power in the battery at all times."
+  echo "    For example: 'battery-discharging &'"
+  echo ""
+  echo "ARGS:"
+  echo "  None."
+  echo ""
+  echo "OPTIONS:"
+  echo "  ┌──────┬──────────────────┬──────────────────────────────────────────────────┐"
+  echo "  │ Abbr │       Long       │                     Information                  │"
+  echo "  ╞══════╪══════════════════╪══════════════════════════════════════════════════╡"
+  echo "  │  -d  │ --duration       │ The duration of the beep.                        │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     integer | float                    │"
+  echo "  │      │                  │   - Values:   1                                  │"
+  echo "  │      │                  │   - Default:  0.2                                │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -f  │ --frequency      │ The frequency of the beep. Low values are low    │"
+  echo "  │      │                  │ sounds, and high values are high sounds.         │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     integer                            │"
+  echo "  │      │                  │   - Values:   1500                               │"
+  echo "  │      │                  │   - Default:  2000                               │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -h  │ --help           │ Display information for this command and exit.   │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     none                               │"
+  echo "  │      │                  │   - Values:   none                               │"
+  echo "  │      │                  │   - Default:  none                               │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -p  │ --path           │ The path of the directory where the list of power│"
+  echo "  │      │                  │ supply devices is located.                       │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     string                             │"
+  echo "  │      │                  │   - Values:   /dev/battery                       │"
+  echo "  │      │                  │   - Default:  /sys/class/power_supply            │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -s  │ --status         │ Linux stores the battery status in a file.       │"
+  echo "  │      │                  │ Text that must match within the battery file.    │"
+  echo "  │      │                  │ The text is not case-sensitive.                  │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     string                             │"
+  echo "  │      │                  │   - Values:   Disconnected                       │"
+  echo "  │      │                  │   - Default:  Discharging                        │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -t  │ --test           │ Try the beep a certain number of times and exit. │"
+  echo "  │      │                  │ This is used with the '--duration', '--frequency'│"
+  echo "  │      │                  │ and '--wait' options.                            │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     integer                            │"
+  echo "  │      │                  │   - Values:   15                                 │"
+  echo "  │      │                  │   - Default:  3                                  │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -V  │ --version        │ Display the version of this tool along with the  │"
+  echo "  │      │                  │ project information and exit.                    │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     none                               │"
+  echo "  │      │                  │   - Values:   none                               │"
+  echo "  │      │                  │   - Default:  none                               │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │      │ --version-simple │ Display the version of this tool and exit.       │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     none                               │"
+  echo "  │      │                  │   - Values:   none                               │"
+  echo "  │      │                  │   - Default:  none                               │"
+  echo "  ├──────┼──────────────────┼──────────────────────────────────────────────────┤"
+  echo "  │  -w  │ --wait           │ Waiting time between one beep and another.       │"
+  echo "  │      │                  │   - Required: no                                 │"
+  echo "  │      │                  │   - Type:     integer | float                    │"
+  echo "  │      │                  │   - Values:   5                                  │"
+  echo "  │      │                  │   - Default:  2.5                                │"
+  echo "  └──────┴──────────────────┴──────────────────────────────────────────────────┘"
+  echo ""
+  echo "EXAMPLES:"
+  echo "  - Default values."
+  echo "    - Commands:"
+  echo "        battery-discharging"
+  echo "        battery-discharging &"
+  echo ""
+  echo "  - Test the beep six times with a frequency of 1250, a duration of 0.5 seconds,"
+  echo "    and a wait between each beep of 1.3 seconds."
+  echo "    - Commands:"
+  echo "        battery-discharging --frequency 1250 --duration 0.5 --wait 1.3 --test 6"
+  echo "        battery-discharging -f 1250 -d 0.5 -w 1.3 -t 6"
+  echo ""
+  echo "  - Assigns the frequency of the beep."
+  echo "    - Commands:"
+  echo "        battery-discharging --frequency 400"
+  echo "        battery-discharging -f 400"
+  echo ""
+  echo "  - Assigns the duration of the beep."
+  echo "    - Commands:"
+  echo "        battery-discharging --duration 1.2"
+  echo "        battery-discharging -d 1.2"
+  echo ""
+  echo "  - Assign the wait between one beep and another."
+  echo "    - Commands:"
+  echo "        battery-discharging --wait 7.7"
+  echo "        battery-discharging -w 7.7"
+  echo ""
+  echo "  - Assign the path where the Linux files related to the power supply are"
+  echo "    located."
+  echo "    - Commands:"
+  echo "        battery-discharging --path /udev/system/power_supply"
+  echo "        battery-discharging -p /udev/system/power_supply"
+  echo ""
+  echo "  - Assign the text that must be matched within the Linux file related to the"
+  echo "    power supply."
+  echo "    - Commands:"
+  echo "        battery-discharging --status 'Not connected'"
+  echo "        battery-discharging -s 'Not connected'"
+  echo ""
+  echo "  - Multiple options can be used multiple times. It will only take the last"
+  echo "    value of each option."
+  echo "    - In this example it will set the frequency to 15."
+  echo "        battery-discharging --frequency 321 --frequency 123456 --frequency 15"
+  echo ""
+  display_version
+  echo ""
+  echo ""
+}
+
+display_version() {
+  echo "VERSION:"
+  echo "  ${VERSION}"
+  echo ""
+  echo "  Source: https://github.com/airvzxf/archlinux-battery-discharging/"
+  echo "  Author: Israel Roldan"
+  echo "    Email: israel.alberto.rv@gmail.com"
+  echo "    GitHub: @airvzxf"
+  echo "    Twitter: @IsraelAlbert_RV"
+  echo "    Website: https://www.rovisoft.net/"
+}
+
+display_version_simple() {
+  echo "${VERSION}"
+}
+
+parse_arguments() {
+  while [[ ${#} -gt 0 ]]; do
+    case "${1}" in
+      -d | --duration)
+        # Remove this argument.
+        shift
+        SOUND_DURATION="${1}"
+        # Remove this value.
+        shift
+        ;;
+      -f | --frequency)
+        # Remove this argument.
+        shift
+        SOUND_FREQUENCY="${1}"
+        # Remove this value.
+        shift
+        ;;
+      -h | --help)
+        display_help
+        exit 0
+        ;;
+      -p | --path)
+        # Remove this argument.
+        shift
+        POWER_SUPPLY_PATH="${1}"
+        # Remove this value.
+        shift
+        ;;
+      -s | --status)
+        # Remove this argument.
+        shift
+        BATTERY_STATUS="${1}"
+        # Remove this value.
+        shift
+        ;;
+      -t | --test)
+        # Remove this argument.
+        shift
+        TEST_TIMES="${1}"
+        # Remove this value.
+        shift
+        test_sound
+        exit 0
+        ;;
+      -V | --version)
+        display_version
+        exit 0
+        ;;
+      --version-simple)
+        display_version_simple
+        exit 0
+        ;;
+      -w | --wait)
+        # Remove this argument.
+        shift
+        BEEP_WAIT_SECONDS="${1}"
+        # Remove this value.
+        shift
+        ;;
+      --* | -* | *)
+        echo "Unknown option ${1}."
+        echo "Review the help with this command:"
+        echo "  battery-discharging -h"
+        exit 1
+        ;;
+    esac
+  done
+}
+
+beep_now() {
+  speaker-test --test sine --nloops 1 --frequency "${SOUND_FREQUENCY}" 1> /dev/null &
+
+  local pid
+  pid="${!}"
+  sleep "${SOUND_DURATION}s"
+  kill -9 "${pid}"
+  wait "${pid}" 2> /dev/null || true
+}
+
+test_sound() {
+  local count
+  for ((count=1; count <= TEST_TIMES; count++)); do
+    echo "Test #${count}"
+    beep_now
+    sleep "${BEEP_WAIT_SECONDS}s"
+  done
+  echo "The test has ended."
+}
+
+battery_discharging() {
+  ls "${POWER_SUPPLY_PATH}" 1> /dev/null 2> /dev/null || {
+    echo "ERROR: Trying to display the power supply directory: ${POWER_SUPPLY_PATH}"
+    exit 1
+  }
+
+  declare -a batteries=()
+  local power_supply
+  for power_supply in "${POWER_SUPPLY_PATH}"/*; do
+    if [[ ${power_supply} =~ (CMB|BAT|battery) ]]; then
+      batteries+=("${power_supply}")
+    fi
+  done
+
+  if [ -z "${batteries[*]}" ]; then
+    echo "ERROR: There is no battery in this device."
+    echo "- Display the power supply directory: ${POWER_SUPPLY_PATH}"
+    ls "${POWER_SUPPLY_PATH}"
+    return 1
+  fi
+
+  local battery
+  while true; do
+    for battery in "${batteries[@]}"; do
+      if grep --quiet --ignore-case "${BATTERY_STATUS}" "${battery}/status"; then
+        beep_now
+      fi
+    done
+    sleep "${BEEP_WAIT_SECONDS}s"
+  done
+}
+
+main() {
+  parse_arguments "${@}"
+  battery_discharging
+}
+
+main "${@}"

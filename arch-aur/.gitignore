@@ -1,7 +1,0 @@
-battery-discharging-beep
-pkg
-src
-*.pkg.tar.zst
-*.tar.gz
-*.zip
-.SRCINFO
