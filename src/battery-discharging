@@ -2,7 +2,7 @@
 set -e
 set +xv
 
-VERSION="v1.0.2"
+VERSION="v1.0.3"
 BATTERY_STATUS="Discharging"
 BEEP_WAIT_SECONDS="2.5"
 POWER_SUPPLY_PATH="/sys/class/power_supply"
